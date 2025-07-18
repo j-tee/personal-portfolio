@@ -1,44 +1,83 @@
 from rest_framework import serializers
-from .models import AboutMe, Skill, TechStack, Project, Contact, Blog, ProjectImage
+from .models import (
+    Greeting, SocialMediaLinks, Skill, SkillDetail, SoftwareSkill,
+    Education, EducationBullet, TechStack, WorkExperience, WorkDescBullet,
+    Project, ProjectImage, Achievement, AchievementLink, Blog, Talk,
+    Podcast, Resume, ContactInfo, TwitterDetails, OpenSource,
+    SplashScreen, AboutMe, Contact
+)
+
+
+class GreetingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Greeting
+        fields = "__all__"
+
+
+class SocialMediaLinksSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialMediaLinks
+        fields = "__all__"
+
+
+class SkillDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SkillDetail
+        fields = "__all__"
+
+
+class SoftwareSkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SoftwareSkill
+        fields = "__all__"
 
 
 class SkillSerializer(serializers.ModelSerializer):
+    details = SkillDetailSerializer(many=True, read_only=True)
+    software_skills = SoftwareSkillSerializer(many=True, read_only=True)
+
     class Meta:
         model = Skill
-        fields = ["id", "name"]
+        fields = ["id", "title", "subtitle", "display", "details", "software_skills"]
+
+
+class EducationBulletSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EducationBullet
+        fields = "__all__"
+
+
+class EducationSerializer(serializers.ModelSerializer):
+    bullets = EducationBulletSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Education
+        fields = [
+            "id", "school_name", "logo", "sub_header", "duration",
+            "description", "display", "bullets"
+        ]
 
 
 class TechStackSerializer(serializers.ModelSerializer):
     class Meta:
         model = TechStack
-        fields = ["id", "name"]
+        fields = "__all__"
 
 
-class AboutMeSerializer(serializers.ModelSerializer):
-    skills = SkillSerializer(many=True, read_only=True)
-    skill_ids = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Skill.objects.all(), write_only=True, source="skills"
-    )
+class WorkDescBulletSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkDescBullet
+        fields = "__all__"
 
-    tech_stacks = TechStackSerializer(many=True, read_only=True)
-    tech_stack_ids = serializers.PrimaryKeyRelatedField(
-        many=True,
-        queryset=TechStack.objects.all(),
-        write_only=True,
-        source="tech_stacks",
-    )
+
+class WorkExperienceSerializer(serializers.ModelSerializer):
+    bullets = WorkDescBulletSerializer(many=True, read_only=True)
 
     class Meta:
-        model = AboutMe
+        model = WorkExperience
         fields = [
-            "name",
-            "headline",
-            "bio",
-            "profile_picture",
-            "skills",
-            "skill_ids",
-            "tech_stacks",
-            "tech_stack_ids",
+            "id", "role", "company", "company_logo", "date",
+            "description", "display", "bullets"
         ]
 
 
@@ -49,36 +88,85 @@ class ProjectImageSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    tech_stack = TechStackSerializer(many=True, read_only=True)
-    tech_stack_ids = serializers.PrimaryKeyRelatedField(
-        many=True,
-        queryset=TechStack.objects.all(),
-        write_only=True,
-        source="tech_stack",
-    )
     images = ProjectImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Project
         fields = [
-            "title",
-            "description",
-            "live_url",
-            "github_url",
-            "image",
-            "tech_stack",
-            "tech_stack_ids",
-            "images",
+            "id", "title", "subtitle", "image", "description",
+            "url", "display", "images"
         ]
 
 
-class ContactSerializer(serializers.ModelSerializer):
+class AchievementLinkSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Contact
+        model = AchievementLink
         fields = "__all__"
+
+
+class AchievementSerializer(serializers.ModelSerializer):
+    links = AchievementLinkSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Achievement
+        fields = ["id", "title", "subtitle", "image", "image_alt", "links"]
 
 
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
+        fields = "__all__"
+
+
+class TalkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Talk
+        fields = "__all__"
+
+
+class PodcastSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Podcast
+        fields = "__all__"
+
+
+class ResumeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Resume
+        fields = "__all__"
+
+
+class ContactInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactInfo
+        fields = "__all__"
+
+
+class TwitterDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TwitterDetails
+        fields = "__all__"
+
+
+class OpenSourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OpenSource
+        fields = "__all__"
+
+
+class SplashScreenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SplashScreen
+        fields = "__all__"
+
+
+class AboutMeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AboutMe
+        fields = "__all__"
+
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
         fields = "__all__"

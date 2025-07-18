@@ -1,16 +1,23 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
-from .models import AboutMe
+from .models import (
+    AboutMe,
+    Skill,
+    TechStack,
+    Project,
+    Contact,
+    Blog,
+    ProjectImage
+)
 from .serializers import (
-    BlogSerializer,
     AboutMeSerializer,
     SkillSerializer,
     TechStackSerializer,
     ProjectSerializer,
     ContactSerializer,
+    BlogSerializer,
+    ProjectImageSerializer,
 )
-from .models import Skill, TechStack, Project, Contact, Blog
-
 
 # ===== ABOUT ME =====
 class AboutMeListCreateView(generics.ListCreateAPIView):
@@ -43,6 +50,17 @@ class ProjectListCreateView(generics.ListCreateAPIView):
 class ProjectRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+
+# ===== PROJECT IMAGE =====
+class ProjectImageListCreateView(generics.ListCreateAPIView):
+    queryset = ProjectImage.objects.all()
+    serializer_class = ProjectImageSerializer
+
+
+class ProjectImageRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ProjectImage.objects.all()
+    serializer_class = ProjectImageSerializer
 
 
 # ===== BLOG =====
