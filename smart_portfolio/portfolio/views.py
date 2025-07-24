@@ -7,10 +7,12 @@ from .models import (
     Project,
     Contact,
     Blog,
-    ProjectImage
+    ProjectImage,
+    Greeting
 )
 from .serializers import (
     AboutMeSerializer,
+    GreetingSerializer,
     SkillSerializer,
     TechStackSerializer,
     ProjectSerializer,
@@ -94,3 +96,12 @@ class TechStackListCreateView(generics.ListCreateAPIView):
 class TechStackRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = TechStack.objects.all()
     serializer_class = TechStackSerializer
+
+# ===== GREETINGS =====
+class GreetingsListCreateView(generics.ListCreateAPIView):
+    queryset = Greeting.objects.all()  # Assuming Greetings is similar to AboutMe
+    serializer_class = GreetingSerializer     # Use the same serializer for simplicity  
+
+class GreetingsRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Greeting.objects.all()  # Assuming Greetings is similar to AboutMe
+    serializer_class = GreetingSerializer  # Use the same serializer for simplicity

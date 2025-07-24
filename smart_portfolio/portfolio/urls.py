@@ -13,7 +13,9 @@ from .views import (
     SkillListCreateView,
     SkillRetrieveUpdateDestroyView,
     TechStackListCreateView,
-    TechStackRetrieveUpdateDestroyView
+    TechStackRetrieveUpdateDestroyView,
+    GreetingsListCreateView,
+    GreetingsRetrieveUpdateDestroyView
 )
 
 urlpatterns = [
@@ -44,4 +46,8 @@ urlpatterns = [
     # === Blog ===
     path("blogs/", BlogListCreateView.as_view(), name="blog-list-create"),
     path("blogs/<int:pk>/", BlogRetrieveUpdateDestroyView.as_view(), name="blog-detail"),
+
+    # === Greetings ===
+    path("greetings/", GreetingsListCreateView.as_view(), name="greetings-list-create"),
+    path("greetings/<int:pk>/", GreetingsRetrieveUpdateDestroyView.as_view(), name="greetings-detail"),
 ]

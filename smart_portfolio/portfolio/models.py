@@ -6,6 +6,7 @@ class Greeting(models.Model):
     subtitle = models.TextField()
     resume_link = models.URLField(blank=True)
     display = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class SocialMediaLinks(models.Model):
     platform = models.CharField(max_length=50)
