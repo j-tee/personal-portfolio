@@ -1,10 +1,29 @@
 from rest_framework import serializers
 from .models import (
-    Greeting, SocialMediaLinks, Skill, SkillDetail, SoftwareSkill,
-    Education, EducationBullet, TechStack, WorkExperience, WorkDescBullet,
-    Project, ProjectImage, Achievement, AchievementLink, Blog, Talk,
-    Podcast, Resume, ContactInfo, TwitterDetails, OpenSource,
-    SplashScreen, AboutMe, Contact
+    Greeting,
+    SocialMediaLinks,
+    Skill,
+    SkillDetail,
+    SoftwareSkill,
+    Education,
+    EducationBullet,
+    TechStack,
+    WorkExperience,
+    WorkDescBullet,
+    Project,
+    ProjectImage,
+    Achievement,
+    AchievementLink,
+    Blog,
+    Talk,
+    Podcast,
+    Resume,
+    ContactInfo,
+    TwitterDetails,
+    OpenSource,
+    SplashScreen,
+    AboutMe,
+    Contact,
 )
 
 
@@ -53,8 +72,14 @@ class EducationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Education
         fields = [
-            "id", "school_name", "logo", "sub_header", "duration",
-            "description", "display", "bullets"
+            "id",
+            "school_name",
+            "logo",
+            "sub_header",
+            "duration",
+            "description",
+            "display",
+            "bullets",
         ]
 
 
@@ -76,8 +101,14 @@ class WorkExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkExperience
         fields = [
-            "id", "role", "company", "company_logo", "date",
-            "description", "display", "bullets"
+            "id",
+            "role",
+            "company",
+            "company_logo",
+            "date",
+            "description",
+            "display",
+            "bullets",
         ]
 
 
@@ -93,8 +124,14 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = [
-            "id", "title", "subtitle", "image", "description",
-            "url", "display", "images"
+            "id",
+            "title",
+            "subtitle",
+            "image",
+            "description",
+            "url",
+            "display",
+            "images",
         ]
 
 
